@@ -18,7 +18,7 @@ class CreateBankAccountsTable extends Migration
             $table->integer('account_number');
             $table->float('balance');
             $table->string('account_type');
-            $table->integer('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
