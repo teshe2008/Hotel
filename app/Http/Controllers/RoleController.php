@@ -83,7 +83,7 @@ class RoleController extends Controller
         $role = Role::find($id);
         $rolePermissions = Permission::join("role_has_permissions","role_has_permissions.permission_id","=","permission"
         ->where("role_has_permissions.role_id",$id)
-        ->select()->get();
+        ->get();
        
         return view('roles.show',compact('role','rolePermissions'));
     }

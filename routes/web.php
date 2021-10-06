@@ -27,4 +27,5 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::resource('user', UserController::class);
     Route::resource('hotel', HotelController::class);
     Route::resource('profile', ProfileController::class);
+    Route::resource('Owner', OwnerController::class);
 });
