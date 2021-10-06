@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Contracts\Permission;
 
 class PermissionTableSeeder extends Seeder
@@ -23,7 +24,8 @@ class PermissionTableSeeder extends Seeder
          ];
       
          foreach ($permissions as $permission) {
-              Permission::create(['name' => $permission]);
+             
+              DB::table('permissions')->insert(['name' => $permission,'guard_name'=>'web']);
          }
  
     }
