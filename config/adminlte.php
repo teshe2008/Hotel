@@ -299,10 +299,10 @@ return [
             'url'        => 'admin/user',
         ],
         [
-            'text'=>'Permission',
+            'text'=>'Role',
             'icon_color'=>'blue',
             'icon'=>'fa fas fa-list',
-            'url'=>''
+            'url'=>'admin/role'
         ]
     ],
 

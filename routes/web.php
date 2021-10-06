@@ -4,6 +4,7 @@ use App\Http\Controllers\HotelController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RoleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,5 +28,6 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::resource('user', UserController::class);
     Route::resource('hotel', HotelController::class);
     Route::resource('profile', ProfileController::class);
-    Route::resource('Owner', OwnerController::class);
+  //  Route::resource('Owner', OwnerController::class);
+    Route::resource('role', RoleController::class);
 });
