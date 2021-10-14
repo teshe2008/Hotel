@@ -20,9 +20,9 @@ class CreateHotelsTable extends Migration
             $table->string('location');
             $table->string('HotelClass');
             $table->string('image');
-            $table->integer('restaurant')->yes(no);
-            $table->integer('Indoor_ATM')->yes(no);
-            $table->integer('Free_Wifi')->yes(no);
+            $table->integer('restaurant');
+            $table->integer('Indoor_ATM');
+            $table->integer('Free_Wifi');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateFeedbackTable extends Migration
 {
+
     /**
      * Run the migrations.
      *
@@ -14,14 +15,15 @@ class CreateFeedbackTable extends Migration
     public function up()
     {
         Schema::create('feedback', function (Blueprint $table) {
-            $table->id();
-            $table->string('feedbak');
+            $table->id('id');
+            $table->string('feedback');
             $table->string('image');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('hotel_id');
+            $table->timestamps();
+            $table->softDeletes();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('hotel_id')->references('id')->on('hotels');
-            $table->timestamps();
         });
     }
 
@@ -32,6 +34,6 @@ class CreateFeedbackTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('feedback');
+        Schema::drop('feedback');
     }
 }

@@ -2,84 +2,150 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\FeedbackDataTable;
+use App\Http\Requests;
+use App\Http\Requests\CreateFeedbackRequest;
+use App\Http\Requests\UpdateFeedbackRequest;
 use App\Models\Feedback;
-use Illuminate\Http\Request;
+use Flash;
+use App\Http\Controllers\AppBaseController;
+use Response;
 
-class FeedbackController extends Controller
+class FeedbackController extends AppBaseController
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the Feedback.
      *
-     * @return \Illuminate\Http\Response
+     * @param FeedbackDataTable $feedbackDataTable
+     * @return Response
      */
-    public function index()
+    public function index(FeedbackDataTable $feedbackDataTable)
     {
-        //
+        return $feedbackDataTable->render('feedback.index');
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new Feedback.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
-        //
+        return view('feedback.create');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created Feedback in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param CreateFeedbackRequest $request
+     *
+     * @return Response
      */
-    public function store(Request $request)
+    public function store(CreateFeedbackRequest $request)
     {
-        //
+        $input = $request->all();
+
+        /** @var Feedback $feedback */
+        $feedback = Feedback::create($input);
+
+        Flash::success('Feedback saved successfully.');
+
+        return redirect(route('feedback.index'));
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified Feedback.
      *
-     * @param  \App\Models\Feedback  $feedback
-     * @return \Illuminate\Http\Response
+     * @param  int $id
+     *
+     * @return Response
      */
-    public function show(Feedback $feedback)
+    public function show($id)
     {
-        //
+        /** @var Feedback $feedback */
+        $feedback = Feedback::find($id);
+
+        if (empty($feedback)) {
+            Flash::error('Feedback not found');
+
+            return redirect(route('feedback.index'));
+        }
+
+        return view('feedback.show')->with('feedback', $feedback);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified Feedback.
      *
-     * @param  \App\Models\Feedback  $feedback
-     * @return \Illuminate\Http\Response
+     * @param  int $id
+     *
+     * @return Response
      */
-    public function edit(Feedback $feedback)
+    public function edit($id)
     {
-        //
+        /** @var Feedback $feedback */
+        $feedback = Feedback::find($id);
+
+        if (empty($feedback)) {
+            Flash::error('Feedback not found');
+
+            return redirect(route('feedback.index'));
+        }
+
+        return view('feedback.edit')->with('feedback', $feedback);
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified Feedback in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Feedback  $feedback
-     * @return \Illuminate\Http\Response
+     * @param  int              $id
+     * @param UpdateFeedbackRequest $request
+     *
+     * @return Response
      */
-    public function update(Request $request, Feedback $feedback)
+    public function update($id, UpdateFeedbackRequest $request)
     {
-        //
+        /** @var Feedback $feedback */
+        $feedback = Feedback::find($id);
+
+        if (empty($feedback)) {
+            Flash::error('Feedback not found');
+
+            return redirect(route('feedback.index'));
+        }
+
+        $feedback->fill($request->all());
+        $feedback->save();
+
+        Flash::success('Feedback updated successfully.');
+
+        return redirect(route('feedback.index'));
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified Feedback from storage.
      *
-     * @param  \App\Models\Feedback  $feedback
-     * @return \Illuminate\Http\Response
+     * @param  int $id
+     *
+     * @throws \Exception
+     *
+     * @return Response
      */
-    public function destroy(Feedback $feedback)
+    public function destroy($id)
     {
-        //
+        /** @var Feedback $feedback */
+        $feedback = Feedback::find($id);
+
+        if (empty($feedback)) {
+            Flash::error('Feedback not found');
+
+            return redirect(route('feedback.index'));
+        }
+
+        $feedback->delete();
+
+        Flash::success('Feedback deleted successfully.');
+
+        return redirect(route('feedback.index'));
     }
 }

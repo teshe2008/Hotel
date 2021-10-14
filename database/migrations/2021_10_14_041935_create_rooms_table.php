@@ -20,10 +20,10 @@ class CreateRoomsTable extends Migration
             $table->integer('room_number');
             $table->string('room_type');
             $table->float('price');
-            $table->integer('hotel_id')->unsigned();
+            $table->unsignedBigInteger('hotel_id');
+            $table->foreign('hotel_id')->references('id')->on('hotels');
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('hotel_id')->references('id')->on('hotels');
         });
     }
 

@@ -50,3 +50,9 @@ Route::resource('hotels', App\Http\Controllers\HotelController::class);
 
 
 Route::resource('rooms', App\Http\Controllers\RoomsController::class);
+
+
+Route::resource('feedback', App\Http\Controllers\FeedbackController::class);
+
+
+Route::resource('reservations', App\Http\Controllers\ReservationController::class);

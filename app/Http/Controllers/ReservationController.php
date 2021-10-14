@@ -2,84 +2,150 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\ReservationDataTable;
+use App\Http\Requests;
+use App\Http\Requests\CreateReservationRequest;
+use App\Http\Requests\UpdateReservationRequest;
 use App\Models\Reservation;
-use Illuminate\Http\Request;
+use Flash;
+use App\Http\Controllers\AppBaseController;
+use Response;
 
-class ReservationController extends Controller
+class ReservationController extends AppBaseController
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the Reservation.
      *
-     * @return \Illuminate\Http\Response
+     * @param ReservationDataTable $reservationDataTable
+     * @return Response
      */
-    public function index()
+    public function index(ReservationDataTable $reservationDataTable)
     {
-        //
+        return $reservationDataTable->render('reservations.index');
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new Reservation.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
-        //
+        return view('reservations.create');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created Reservation in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param CreateReservationRequest $request
+     *
+     * @return Response
      */
-    public function store(Request $request)
+    public function store(CreateReservationRequest $request)
     {
-        //
+        $input = $request->all();
+
+        /** @var Reservation $reservation */
+        $reservation = Reservation::create($input);
+
+        Flash::success('Reservation saved successfully.');
+
+        return redirect(route('reservations.index'));
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified Reservation.
      *
-     * @param  \App\Models\Reservation  $reservation
-     * @return \Illuminate\Http\Response
+     * @param  int $id
+     *
+     * @return Response
      */
-    public function show(Reservation $reservation)
+    public function show($id)
     {
-        //
+        /** @var Reservation $reservation */
+        $reservation = Reservation::find($id);
+
+        if (empty($reservation)) {
+            Flash::error('Reservation not found');
+
+            return redirect(route('reservations.index'));
+        }
+
+        return view('reservations.show')->with('reservation', $reservation);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified Reservation.
      *
-     * @param  \App\Models\Reservation  $reservation
-     * @return \Illuminate\Http\Response
+     * @param  int $id
+     *
+     * @return Response
      */
-    public function edit(Reservation $reservation)
+    public function edit($id)
     {
-        //
+        /** @var Reservation $reservation */
+        $reservation = Reservation::find($id);
+
+        if (empty($reservation)) {
+            Flash::error('Reservation not found');
+
+            return redirect(route('reservations.index'));
+        }
+
+        return view('reservations.edit')->with('reservation', $reservation);
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified Reservation in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Reservation  $reservation
-     * @return \Illuminate\Http\Response
+     * @param  int              $id
+     * @param UpdateReservationRequest $request
+     *
+     * @return Response
      */
-    public function update(Request $request, Reservation $reservation)
+    public function update($id, UpdateReservationRequest $request)
     {
-        //
+        /** @var Reservation $reservation */
+        $reservation = Reservation::find($id);
+
+        if (empty($reservation)) {
+            Flash::error('Reservation not found');
+
+            return redirect(route('reservations.index'));
+        }
+
+        $reservation->fill($request->all());
+        $reservation->save();
+
+        Flash::success('Reservation updated successfully.');
+
+        return redirect(route('reservations.index'));
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified Reservation from storage.
      *
-     * @param  \App\Models\Reservation  $reservation
-     * @return \Illuminate\Http\Response
+     * @param  int $id
+     *
+     * @throws \Exception
+     *
+     * @return Response
      */
-    public function destroy(Reservation $reservation)
+    public function destroy($id)
     {
-        //
+        /** @var Reservation $reservation */
+        $reservation = Reservation::find($id);
+
+        if (empty($reservation)) {
+            Flash::error('Reservation not found');
+
+            return redirect(route('reservations.index'));
+        }
+
+        $reservation->delete();
+
+        Flash::success('Reservation deleted successfully.');
+
+        return redirect(route('reservations.index'));
     }
 }

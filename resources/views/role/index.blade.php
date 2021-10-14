@@ -9,7 +9,7 @@
         </div>
         <div class="pull-right">
             @can('role-create')
-                <a class="btn btn-success" href="{{ route('role.create') }}"> Create New Role</a>
+                <a class="btn btn-success" href="{{ route('admin.role.create') }}"> Create New Role</a>
             @endcan
         </div>
     </div>
@@ -32,12 +32,12 @@
             <td>{{ ++$i }}</td>
             <td>{{ $role->name }}</td>
             <td>
-                <a class="btn btn-info" href="{{ route('role.show', $role->id) }}">Show</a>
+                <a class="btn btn-info" href="{{ route('admin.role.show', $role->id) }}">Show</a>
                 @can('role-edit')
-                    <a class="btn btn-primary" href="{{ route('role.edit', $role->id) }}">Edit</a>
+                    <a class="btn btn-primary" href="{{ route('admin.role.edit', $role->id) }}">Edit</a>
                 @endcan
                 @can('role-delete')
-                    <form action="{{ route('user.destroy', $role->id) }}" method="POST"
+                    <form action="{{ route('admin.role.destroy', $role->id) }}" method="POST"
                         onsubmit="return confirm('{{ trans('areYouSure') }}');" style="display: inline-block;">
                         @method('delete')
                         <input type="hidden" name="_method" value="DELETE">

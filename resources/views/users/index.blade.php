@@ -9,7 +9,7 @@
             @stop
         </div>
         <div class="float-right">
-            <a class="btn btn-success" href="{{ route('user.create') }}"> Create New User</a>
+            <a class="btn btn-success" href="{{ route('admin.user.create') }}"> Create New User</a>
         </div>
     </div>
 </div>
@@ -39,9 +39,9 @@
                 @endif
             </td>
             <td>
-                <a class="btn btn-info" href="{{ route('user.show', $user->id) }}">Show</a>
-                <a class="btn btn-primary" href="{{ route('user.edit', $user->id) }}">Edit</a>
-                <form action="{{ route('user.destroy', $user->id) }}" method="POST"
+                <a class="btn btn-info" href="{{ route('admin.user.show', $user->id) }}">Show</a>
+                <a class="btn btn-primary" href="{{ route('admin.user.edit', $user->id) }}">Edit</a>
+                <form action="{{ route('admin.user.destroy', $user->id) }}" method="POST"
                     onsubmit="return confirm('{{ trans('areYouSure') }}');" style="display: inline-block;">
                     @method('delete')
                     <input type="hidden" name="_method" value="DELETE">

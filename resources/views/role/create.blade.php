@@ -9,7 +9,7 @@
 
         </div>
         <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('role.index') }}"> Back</a>
+            <a class="btn btn-primary" href="{{ route('admin.role.index') }}"> Back</a>
         </div>
     </div>
 </div>
@@ -27,7 +27,7 @@
 @endif
 
 
-{!! Form::open(['route' => 'role.store', 'method' => 'POST']) !!}
+{!! Form::open(['route' => 'admin.role.store', 'method' => 'POST']) !!}
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">

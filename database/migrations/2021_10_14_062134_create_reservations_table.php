@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateReservationsTable extends Migration
 {
+
     /**
      * Run the migrations.
      *
@@ -14,7 +15,7 @@ class CreateReservationsTable extends Migration
     public function up()
     {
         Schema::create('reservations', function (Blueprint $table) {
-            $table->id();
+            $table->id('id');
             $table->string('name');
             $table->string('job');
             $table->dateTime('checkin');
@@ -24,6 +25,7 @@ class CreateReservationsTable extends Migration
             $table->foreign('room_id')->references('id')->on('rooms');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -34,6 +36,6 @@ class CreateReservationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reservations');
+        Schema::drop('reservations');
     }
 }
