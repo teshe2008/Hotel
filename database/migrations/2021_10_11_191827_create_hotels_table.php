@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateHotelsTable extends Migration
 {
+
     /**
      * Run the migrations.
      *
@@ -14,13 +15,16 @@ class CreateHotelsTable extends Migration
     public function up()
     {
         Schema::create('hotels', function (Blueprint $table) {
-            $table->id();
-            $table->string('name')->unique();
+            $table->id('id');
+            $table->string('name');
             $table->string('location');
             $table->string('HotelClass');
             $table->string('image');
-            $table->boolean('restaurant');
+            $table->integer('restaurant')->yes(no);
+            $table->integer('Indoor_ATM')->yes(no);
+            $table->integer('Free_Wifi')->yes(no);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -31,6 +35,6 @@ class CreateHotelsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hotels');
+        Schema::drop('hotels');
     }
 }

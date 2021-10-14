@@ -22,12 +22,8 @@ use Spatie\Permission\Contracts\Role;
 /* 
 Route::get('admin', function ($id) {
     return view('welcome');
-});
- Route::get('/', function () {
-  return view('ownerlogin');
-}); */
-
-
+});*/
+ 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -36,12 +32,21 @@ Route::get('ownerregister', function () {
   return view('ownerregister');
 })->name('ownerregister');
 Route::post('register_owner', [LoginController::class, 'create_owner'])->name('owner.create');
-
-Route::get('owner/login', [LoginController::class, 'login'])->name('owner.login');
 Route::group(['middleware' => ['auth'], 'as' => 'admin.'], function () {
   Route::resource('user', UserController::class);
-  Route::resource('hotel', HotelController::class);
   Route::resource('profile', ProfileController::class);
   Route::resource('Owner', OwnerController::class);
   Route::resource('role', RoleController::class);
 });
+
+Route::get('/', function () {
+  return view('welcome');
+}); 
+
+
+
+
+Route::resource('hotels', App\Http\Controllers\HotelController::class);
+
+
+Route::resource('rooms', App\Http\Controllers\RoomsController::class);

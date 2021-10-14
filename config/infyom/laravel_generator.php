@@ -136,9 +136,9 @@ return [
 
         'tables_searchable_default' => false,
 
-        'repository_pattern' => true,
+        'repository_pattern' => false,
 
-        'resources' => false,
+        'resources' => true,
 
         'excluded_fields' => ['id'], // Array of columns that doesn't required while creating module
     ],
@@ -174,7 +174,7 @@ return [
 
         'tests'         => true,
 
-        'datatables'    => false,
+        'datatables'    => true,
 
         'menu'          => [
 

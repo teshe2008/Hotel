@@ -2,84 +2,150 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\HotelDataTable;
+use App\Http\Requests;
+use App\Http\Requests\CreateHotelRequest;
+use App\Http\Requests\UpdateHotelRequest;
 use App\Models\Hotel;
-use Illuminate\Http\Request;
+use Flash;
+use App\Http\Controllers\AppBaseController;
+use Response;
 
-class HotelController extends Controller
+class HotelController extends AppBaseController
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the Hotel.
      *
-     * @return \Illuminate\Http\Response
+     * @param HotelDataTable $hotelDataTable
+     * @return Response
      */
-    public function index()
+    public function index(HotelDataTable $hotelDataTable)
     {
-        //
+        return $hotelDataTable->render('hotels.index');
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new Hotel.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
-        //
+        return view('hotels.create');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created Hotel in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param CreateHotelRequest $request
+     *
+     * @return Response
      */
-    public function store(Request $request)
+    public function store(CreateHotelRequest $request)
     {
-        //
+        $input = $request->all();
+
+        /** @var Hotel $hotel */
+        $hotel = Hotel::create($input);
+
+        Flash::success('Hotel saved successfully.');
+
+        return redirect(route('hotels.index'));
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified Hotel.
      *
-     * @param  \App\Models\Hotel  $hotel
-     * @return \Illuminate\Http\Response
+     * @param  int $id
+     *
+     * @return Response
      */
-    public function show(Hotel $hotel)
+    public function show($id)
     {
-        //
+        /** @var Hotel $hotel */
+        $hotel = Hotel::find($id);
+
+        if (empty($hotel)) {
+            Flash::error('Hotel not found');
+
+            return redirect(route('hotels.index'));
+        }
+
+        return view('hotels.show')->with('hotel', $hotel);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified Hotel.
      *
-     * @param  \App\Models\Hotel  $hotel
-     * @return \Illuminate\Http\Response
+     * @param  int $id
+     *
+     * @return Response
      */
-    public function edit(Hotel $hotel)
+    public function edit($id)
     {
-        //
+        /** @var Hotel $hotel */
+        $hotel = Hotel::find($id);
+
+        if (empty($hotel)) {
+            Flash::error('Hotel not found');
+
+            return redirect(route('hotels.index'));
+        }
+
+        return view('hotels.edit')->with('hotel', $hotel);
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified Hotel in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Hotel  $hotel
-     * @return \Illuminate\Http\Response
+     * @param  int              $id
+     * @param UpdateHotelRequest $request
+     *
+     * @return Response
      */
-    public function update(Request $request, Hotel $hotel)
+    public function update($id, UpdateHotelRequest $request)
     {
-        //
+        /** @var Hotel $hotel */
+        $hotel = Hotel::find($id);
+
+        if (empty($hotel)) {
+            Flash::error('Hotel not found');
+
+            return redirect(route('hotels.index'));
+        }
+
+        $hotel->fill($request->all());
+        $hotel->save();
+
+        Flash::success('Hotel updated successfully.');
+
+        return redirect(route('hotels.index'));
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified Hotel from storage.
      *
-     * @param  \App\Models\Hotel  $hotel
-     * @return \Illuminate\Http\Response
+     * @param  int $id
+     *
+     * @throws \Exception
+     *
+     * @return Response
      */
-    public function destroy(Hotel $hotel)
+    public function destroy($id)
     {
-        //
+        /** @var Hotel $hotel */
+        $hotel = Hotel::find($id);
+
+        if (empty($hotel)) {
+            Flash::error('Hotel not found');
+
+            return redirect(route('hotels.index'));
+        }
+
+        $hotel->delete();
+
+        Flash::success('Hotel deleted successfully.');
+
+        return redirect(route('hotels.index'));
     }
 }
