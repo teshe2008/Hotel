@@ -24,9 +24,11 @@ class CreateAdminUserSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'password' => bcrypt('123456')
         ]);
+    $role1=Role::create(['name'=>'hotel-owner']);
+    $role1->givePermissionTo('create-hotel');
     
         $role = Role::create(['name' => 'Admin']);
-     
+    
         $permissions = Permission::pluck('id','id')->all();
    
         $role->syncPermissions($permissions);
