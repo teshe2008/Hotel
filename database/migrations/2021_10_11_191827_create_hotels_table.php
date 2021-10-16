@@ -21,7 +21,7 @@ class CreateHotelsTable extends Migration
             $table->string('HotelClass');
             $table->string('image');
             $table->integer('restaurant');
-            $table->integer('Indoor_ATM');
+            $table->integer('Indoor_ATM')->default(0);
             $table->integer('Free_Wifi');
             $table->timestamps();
             $table->softDeletes();

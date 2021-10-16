@@ -8,7 +8,7 @@
             <h2>Create New User</h2>
         </div>
         <div class="float-right">
-            <a class="btn btn-primary" href="{{ route('user.index') }}"> Back</a>
+            <a class="btn btn-primary" href="{{ route('admin.user.index') }}"> Back</a>
         </div>
     </div>
 </div>
@@ -22,7 +22,7 @@
         </ul>
     </div>
 @endif
-{!! Form::open(['route' => 'user.store', 'method' => 'POST']) !!}
+{!! Form::open(['route' => 'admin.user.store', 'method' => 'POST']) !!}
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">

@@ -46,6 +46,9 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
+      
+        dd($request->input());
+
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
@@ -59,7 +62,7 @@ class UserController extends Controller
         $user = User::create($input);
         $user->assignRole($request->input('roles'));
 
-        return redirect()->route('users.index')
+        return redirect()->route('admin.users.index')
             ->with('success', 'User created successfully');
     }
 
@@ -125,6 +128,12 @@ class UserController extends Controller
 
         return redirect()->route('users.index')
             ->with('success', 'User updated successfully');
+    }
+
+    public function approve($id)
+    {
+        # code...
+        
     }
 
     /**

@@ -35,7 +35,7 @@
 <div class="form-group col-sm-6">
     <div class="form-check">
         {!! Form::hidden('indoor_ATM', 0, ['class' => 'form-check-input']) !!}
-        {!! Form::checkbox('indoor_ATM', 'yes', null, ['class' => 'form-check-input']) !!}
+        {!! Form::checkbox('indoor_ATM', 'yes', 0, ['class' => 'form-check-input']) !!}
         {!! Form::label('indoor_ATM', 'Indoor Atm', ['class' => 'form-check-label']) !!}
     </div>
 </div>

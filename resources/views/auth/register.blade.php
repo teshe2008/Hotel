@@ -101,13 +101,18 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-8">
-                        <div class="icheck-primary">
-                            <input type="checkbox" id="agreeTerms" name="terms" value="agree">
-                            <label for="agreeTerms">
-                                I agree to the <a href="#">terms</a>
-                            </label>
+                    <div class="input-group mb-3">
+                        <input type="text"
+                               name="role"
+                               value="{{ old('role') }}"
+                               class="form-control @error('role') is-invalid @enderror"
+                               placeholder="Role" value="{{'hotel-owner'}}">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user-alt"></span>
+                            </div>
                         </div>
+
                     </div>
                     <!-- /.col -->
                     <div class="col-4">
