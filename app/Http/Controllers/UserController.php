@@ -9,6 +9,7 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Laracasts\Flash\Flash;
 
 class UserController extends Controller
 {
@@ -46,7 +47,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
-      
+
         dd($request->input());
 
         $this->validate($request, [
@@ -133,14 +134,16 @@ class UserController extends Controller
     public function approve($id)
     {
         # code...
-        dd($id);
-        
+        if ($user = User::find($id)) {
+            $user->assignRole('hotel-owner');
+            Flash::success('approved successfully');
+            return back();
+        }
     }
     public function disApprove($id)
     {
         # code...
         dd($id);
-        
     }
 
     /**
