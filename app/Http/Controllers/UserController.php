@@ -133,6 +133,13 @@ class UserController extends Controller
     public function approve($id)
     {
         # code...
+        dd($id);
+        
+    }
+    public function disApprove($id)
+    {
+        # code...
+        dd($id);
         
     }
 

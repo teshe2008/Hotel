@@ -27,7 +27,16 @@ class CreateAdminUserSeeder extends Seeder
 
         $role1 = Role::create(['name' => 'hotel-owner']);
 
-        $role1->givePermissionTo('hotel-create');
+        $role1->givePermissionTo( 'feedback-list',
+        'feedback-delete',
+        'hotel-view',
+        'hotel-create',
+        'hotel-edit',
+        'hotel-delete',
+        'room-list',
+        'room-create',
+        'room-edit',
+        'room-delete');
 
         $role = Role::create(['name' => 'Admin']);
 

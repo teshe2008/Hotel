@@ -24,6 +24,8 @@
         <th>Name</th>
         <th>Email</th>
         <th>Roles</th>
+        <th> Approval</th>
+
         <th width="280px">Action</th>
     </tr>
     @foreach ($data as $key => $user)
@@ -36,6 +38,24 @@
                     @foreach ($user->getRoleNames() as $v)
                         <label class="badge badge-success">{{ $v }}</label>
                     @endforeach
+                @endif
+            </td>
+            <td>
+                @if ($user->getRoleNames()!=["Admin"] || empty($user->getRoleNames()))
+                <form action="{{ route('admin.user.approve', $user->id) }}" method="POST"
+                    onsubmit="return confirm('{{ trans('are you sure to approve') }}');" style="display: inline-block;">
+                    @method('post')
+                    <input type="hidden" name="_method" value="post">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="btn btn-secondary">approve</button>
+                </form>
+                <form action="{{ route('admin.user.disApprove', $user->id) }}" method="POST"
+                    onsubmit="return confirm('{{ trans('are you sure to approve') }}');" style="display: inline-block;">
+                    @method('post')
+                    <input type="hidden" name="_method" value="post">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="btn btn-warning">DisApprove</button>
+                </form>
                 @endif
             </td>
             <td>

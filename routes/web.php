@@ -38,6 +38,9 @@ Route::group(['middleware' => ['auth'], 'as' => 'admin.'], function () {
   Route::resource('profile', ProfileController::class);
   Route::resource('Owner', OwnerController::class);
   Route::resource('role', RoleController::class);
+  Route::post('user.approve/{id}', [UserController::class,'approve'])->name('user.approve');
+  Route::post('user.disApprove/{id}', [UserController::class,'disApprove'])->name('user.disApprove');
+
 });
 
 Route::get('/', function () {

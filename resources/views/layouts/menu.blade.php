@@ -1,12 +1,15 @@
-<li class="nav-item">
-    <a href="{{ route('hotels.index') }}" class="nav-link {{ Request::is('hotels*') ? 'active' : '' }}">
-        <p>Hotels</p>
-    </a>
-</li>
+@can('hotel-view')
+    <li class="nav-item">
+        <a href="{{ route('hotels.index') }}" class="nav-link {{ Request::is('hotels*') ? 'active' : '' }}">
+            <i class="fa fas fa-hotel">  Hotels</i>
+        </a>
+    </li>
+@endcan
+
 @can('user-management')
     <li class="nav-item">
         <a href="{{ route('admin.user.index') }}" class="nav-link {{ Request::is('users*') ? 'active' : '' }}">
-            <p>Users</p>
+            <i class="fa fas fa-user">  Users</i>
         </a>
     </li>
 @endcan
@@ -14,29 +17,32 @@
 @can('role-list')
     <li class="nav-item">
         <a href="{{ route('admin.role.index') }}" class="nav-link {{ Request::is('role*') ? 'active' : '' }}">
-            <p>Role</p>
+            <i class="fa fas fa-key">  Role</i>
+        </a>
+    </li>
+@endcan
+
+@can('room-list')
+    <li class="nav-item">
+        <a href="{{ route('rooms.index') }}" class="nav-link {{ Request::is('rooms*') ? 'active' : '' }}">
+            <i class="fa fas fa-home"> Rooms</i>
         </a>
     </li>
 @endcan
 
 
-
-<li class="nav-item">
-    <a href="{{ route('rooms.index') }}" class="nav-link {{ Request::is('rooms*') ? 'active' : '' }}">
-        <p>Rooms</p>
-    </a>
-</li>
-
-
-<li class="nav-item">
-    <a href="{{ route('feedback.index') }}" class="nav-link {{ Request::is('feedback*') ? 'active' : '' }}">
-        <p>Feedback</p>
-    </a>
-</li>
-
-
-<li class="nav-item">
-    <a href="{{ route('reservations.index') }}" class="nav-link {{ Request::is('reservations*') ? 'active' : '' }}">
-        <p>Reservations</p>
-    </a>
-</li>
+@can('feedback-list')
+    <li class="nav-item">
+        <a href="{{ route('feedback.index') }}" class="nav-link {{ Request::is('feedback*') ? 'active' : '' }}">
+            <i class="fa fas fa-comments">  Feedback</i>
+        </a>
+    </li>
+@endcan
+@can('reservation-list')
+    <li class="nav-item">
+        <a href="{{ route('reservations.index') }}" 
+        class="nav-link {{ Request::is('reservations*') ? 'active' : '' }}">
+            <i class="fa fas fa-list">  Reservation</i>
+        </a>
+    </li>
+@endcan

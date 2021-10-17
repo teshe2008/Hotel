@@ -32,6 +32,7 @@ class PermissionTableSeeder extends Seeder
             'room-create',
             'room-edit',
             'room-delete',
+            'reservation-list'
             
          ];
       
