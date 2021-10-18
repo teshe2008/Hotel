@@ -61,7 +61,7 @@ class UserController extends Controller
         $user = User::create($input);
         $user->assignRole($request->input('roles'));
 
-        return redirect()->route('admin.users.index')
+        return redirect()->route('admin.user.index')
             ->with('success', 'User created successfully');
     }
 
@@ -75,7 +75,7 @@ class UserController extends Controller
     {
         //
         $user = User::find($id);
-        return view('admin.users.show', compact('user'));
+        return view('admin.user.show', compact('user'));
     }
 
     /**
@@ -92,7 +92,7 @@ class UserController extends Controller
         $roles = Role::pluck('name', 'name')->all();
         $userRole = $user->roles->pluck('name', 'name')->all();
 
-        return view('admin.users.edit', compact('user', 'roles', 'userRole'));
+        return view('admin.user.edit', compact('user', 'roles', 'userRole'));
     }
 
     /**
@@ -125,7 +125,7 @@ class UserController extends Controller
 
         $user->assignRole($request->input('roles'));
 
-        return redirect()->route('admin.users.index')
+        return redirect()->route('admin.user.index')
             ->with('success', 'User updated successfully');
     }
 
@@ -154,7 +154,7 @@ class UserController extends Controller
     {
         //
         User::find($id)->delete();
-        return redirect()->route('admin.users.index')
+        return redirect()->route('admin.user.index')
             ->with('success', 'User deleted successfully');
     }
 }
