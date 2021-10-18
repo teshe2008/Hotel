@@ -33,29 +33,18 @@
 
 <!-- Indoor Atm Field -->
 <div class="form-group col-sm-6">
-    <div class="form-check">
-        {!! Form::hidden('indoor_ATM', 0, ['class' => 'form-check-input']) !!}
-        {!! Form::checkbox('indoor_ATM', 'yes', 0, ['class' => 'form-check-input']) !!}
-        {!! Form::label('indoor_ATM', 'Indoor Atm', ['class' => 'form-check-label']) !!}
-    </div>
+    {!! Form::label('Indoor Atm', 'Indoor ATM:') !!}
+    {!! Form::select('IndooAtm', ['1' => 'yes', '0' => 'no'], null, ['class' => 'form-control custom-select']) !!}
 </div>
-
 
 <!-- Free Wifi Field -->
 <div class="form-group col-sm-6">
-    <div class="form-check">
-        {!! Form::hidden('free_wifi', 0, ['class' => 'form-check-input']) !!}
-        {!! Form::checkbox('free_wifi', 'yes', null, ['class' => 'form-check-input']) !!}
-        {!! Form::label('free_wifi', 'Free Wifi', ['class' => 'form-check-label']) !!}
-    </div>
+    {!! Form::label('Free Wifi', 'Free Wifi:') !!}
+    {!! Form::select('freeWifi', ['1' => 'yes', '0' => 'no'], null, ['class' => 'form-control custom-select']) !!}
 </div>
-
 
 <!-- Free Cancellation Field -->
 <div class="form-group col-sm-6">
-    <div class="form-check">
-        {!! Form::hidden('free_cancellation', 0, ['class' => 'form-check-input']) !!}
-        {!! Form::checkbox('free_cancellation', 'yes', null, ['class' => 'form-check-input']) !!}
-        {!! Form::label('free_cancellation', 'Free Cancellation', ['class' => 'form-check-label']) !!}
-    </div>
+    {!! Form::label('Free Cancellation', 'Free Cancellation:') !!}
+    {!! Form::select('freeCancellation', ['1' => 'yes', '0' => 'no'], null, ['class' => 'form-control custom-select']) !!}
 </div>

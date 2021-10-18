@@ -41,30 +41,22 @@
                 @endif
             </td>
             <td>
-                @if (!empty($user->getRoleNames()))
-                    @foreach ($user->getRoleNames() as $item)
-                        @if (empty($item))
-
-
-                            <form action="{{ route('admin.user.approve', $user->id) }}" method="POST"
-                                onsubmit="return confirm('{{ trans('are you sure to approve') }}');"
-                                style="display: inline-block;">
-                                @method('post')
-                                <input type="hidden" name="_method" value="post">
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                <button type="submit" class="btn btn-secondary">approve</button>
-                            </form>
-                            <form action="{{ route('admin.user.disApprove', $user->id) }}" method="POST"
-                                onsubmit="return confirm('{{ trans('are you sure to dis-approve') }}');"
-                                style="display: inline-block;">
-                                @method('post')
-                                <input type="hidden" name="_method" value="post">
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                <button type="submit" class="btn btn-warning">DisApprove</button>
-                            </form>
-                        @endif
-                    @endforeach
-                @endif
+                <form action="{{ route('admin.user.approve', $user->id) }}" method="POST"
+                    onsubmit="return confirm('{{ trans('are you sure to approve') }}');"
+                    style="display: inline-block;">
+                    @method('post')
+                    <input type="hidden" name="_method" value="post">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="btn btn-secondary">approve</button>
+                </form>
+                <form action="{{ route('admin.user.disApprove', $user->id) }}" method="POST"
+                    onsubmit="return confirm('{{ trans('are you sure to dis-approve') }}');"
+                    style="display: inline-block;">
+                    @method('post')
+                    <input type="hidden" name="_method" value="post">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="btn btn-warning">DisApprove</button>
+                </form>
             </td>
             <td>
                 <a class="btn btn-info" href="{{ route('admin.user.show', $user->id) }}">Show</a>
