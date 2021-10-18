@@ -48,8 +48,6 @@ class UserController extends Controller
     {
         //
 
-        dd($request->input());
-
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
